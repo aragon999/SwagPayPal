@@ -1,3 +1,6 @@
+# REPLACE-GLOBAL-WITH-NEXT-VERSION
+- PT-10677 - Added migration tools for transferring order transaction ids from Shopware 5
+
 # 1.7.1
 - PT-11884 - If PayPal is not available, Plus and Smart Payment Buttons are no longer loaded
 

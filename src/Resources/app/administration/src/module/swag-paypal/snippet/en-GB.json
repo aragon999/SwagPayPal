@@ -178,6 +178,9 @@
             "messageWebhookCreated": "The webhook has been registered.",
             "messageWebhookUpdated": "The webhook has been updated.",
             "messageWebhookError": "The webhook could not be saved. The following errors occurred:"
+        },
+        "migration": {
+            "dataSelection": "PayPal"
         }
     }
 }

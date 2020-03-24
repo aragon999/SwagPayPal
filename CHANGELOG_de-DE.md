@@ -1,3 +1,6 @@
+# REPLACE-GLOBAL-WITH-NEXT-VERSION
+- PT-10677 - Fügt Migrationsmöglichkeit zum Transferieren der Transaktions-ID aus Shopware-5-Bestellungen hinzu
+
 # 1.7.1
 - PT-11884 - Wenn PayPal nicht verfügbar ist, werden Plus und Smart Payment Buttons nicht mehr geladen
 

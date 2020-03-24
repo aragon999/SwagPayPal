@@ -64,6 +64,9 @@ class SwagPayPal extends Plugin
         $loader->load('checkout.xml');
         $loader->load('plus.xml');
         $loader->load('installment.xml');
+        if (isset($container->getParameter('kernel.active_plugins')['SwagMigrationAssistant\SwagMigrationAssistant'])) {
+            $loader->load('migration.xml');
+        }
     }
 
     public function install(InstallContext $installContext): void

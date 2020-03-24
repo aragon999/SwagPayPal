@@ -12,6 +12,7 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
  * Because this would exit the startup of our analyze tools such as Psalm and Phpstan.
  */
 $cmsExtensionsFound = false;
+$migrationAssistantFound = false;
 $files = \scandir('../');
 if (\is_array($files)) {
     foreach ($files as $file) {
@@ -24,10 +25,23 @@ if (\is_array($files)) {
                 echo "Please execute 'composer dump-autoload' in your CmsExtensions directory\n";
             }
         }
+
+        if (\is_dir('../' . $file) && \file_exists('../' . $file . '/SwagMigrationAssistant.php')) {
+            $migrationAssistantFound = true;
+            $pathToMigrationAssistant = '../' . $file . '/vendor/autoload.php';
+            if (\file_exists($pathToMigrationAssistant)) {
+                require_once $pathToMigrationAssistant;
+            } else {
+                echo "Please execute 'composer dump-autoload' in your MigrationAssistant directory\n";
+            }
+        }
     }
 
     if (!$cmsExtensionsFound) {
         echo "You need the CmsExtensions plugin for static analyze to work.\n";
+    }
+    if (!$migrationAssistantFound) {
+        echo "You need the MigrationAssistant plugin for static analyze to work.\n";
     }
 } else {
     echo 'Could not scandir ../';

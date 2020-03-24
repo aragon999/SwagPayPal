@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Swag\PayPal\Migration\Shopware\DataSelection\PayPalDataSelection">
+            <tag name="shopware.migration.data_selection"/>
+            <argument type="service" id="Shopware\Core\Framework\Plugin\PluginService"/>
+        </service>
+
+        <!-- Shopware Converter -->
+        <service id="Swag\PayPal\Migration\Shopware\Converter\PayPalOrderConverter"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Converter\ShopwareConverter" abstract="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Tax\TaxCalculator"/>
+            <argument type="service" id="Swag\PayPal\Util\PaymentMethodUtil"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Converter\Shopware54PayPalOrderConverter"
+                 decorates="SwagMigrationAssistant\Profile\Shopware54\Converter\Shopware54OrderConverter"
+                 decoration-on-invalid="ignore"
+                 parent="Swag\PayPal\Migration\Shopware\Converter\PayPalOrderConverter">
+            <tag name="shopware.migration.converter"/>
+            <argument type="service" id="Swag\PayPal\Migration\Shopware\Converter\Shopware54PayPalOrderConverter.inner"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Converter\Shopware55PayPalOrderConverter"
+                 decorates="SwagMigrationAssistant\Profile\Shopware55\Converter\Shopware55OrderConverter"
+                 decoration-on-invalid="ignore"
+                 parent="Swag\PayPal\Migration\Shopware\Converter\PayPalOrderConverter">
+            <tag name="shopware.migration.converter"/>
+            <argument type="service" id="Swag\PayPal\Migration\Shopware\Converter\Shopware55PayPalOrderConverter.inner"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Converter\Shopware56PayPalOrderConverter"
+                 decorates="SwagMigrationAssistant\Profile\Shopware56\Converter\Shopware56OrderConverter"
+                 decoration-on-invalid="ignore"
+                 parent="Swag\PayPal\Migration\Shopware\Converter\PayPalOrderConverter">
+            <tag name="shopware.migration.converter"/>
+            <argument type="service" id="Swag\PayPal\Migration\Shopware\Converter\Shopware56PayPalOrderConverter.inner"/>
+        </service>
+
+        <!-- Shopware PreMappingReader -->
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalOrderStateReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\OrderStateReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\OrderStateReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalOrderDeliveryStateReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\OrderDeliveryStateReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\OrderDeliveryStateReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalTransactionStateReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\TransactionStateReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\TransactionStateReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalPaymentMethodReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\PaymentMethodReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\PaymentMethodReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalSalutationReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\SalutationReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\SalutationReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="Swag\PayPal\Migration\Shopware\Premapping\PayPalDeliveryTimeReader"
+                 decorates="SwagMigrationAssistant\Profile\Shopware\Premapping\DeliveryTimeReader"
+                 decoration-on-invalid="ignore"
+                 parent="SwagMigrationAssistant\Profile\Shopware\Premapping\DeliveryTimeReader">
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+    </services>
+</container>

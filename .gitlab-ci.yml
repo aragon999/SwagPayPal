@@ -16,9 +16,11 @@ default:
         - rm -rf development/platform
         - git clone --branch 6.2 http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.shopware.com/shopware/6/product/platform.git development/platform
         - git clone http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.shopware.com/shopware/6/services/cms-extensions.git development/custom/plugins/SwagCmsExtensions
+        - git clone --branch pt-10677/add-data-selection-to-migration-context-and-run http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.shopware.com/shopware/6/services/migration-assistant.git development/custom/plugins/SwagMigrationAssistant
         - unzip -q plugin.zip -d development/custom/plugins/SwagPayPal
         - cd development
         - composer dump-autoload -d custom/plugins/SwagCmsExtensions
+        - composer dump-autoload -d custom/plugins/SwagMigrationAssistant
         - cp -v dev-ops/gitlab/.psh.yaml.override .
         - /entrypoint supervisord > /dev/null 2>&1 &
 

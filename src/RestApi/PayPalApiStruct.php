@@ -32,6 +32,8 @@ abstract class PayPalApiStruct implements \JsonSerializable
             if (!\method_exists($this, $setterMethod)) {
                 // There is no setter/property for a given data key from PayPal.
                 // Continue here to not break the plugin, if the plugin is not up-to-date with the PayPal API
+                throw new \RuntimeException($setterMethod . ' does not exists in ' . static::class);
+
                 continue;
             }
 
@@ -46,7 +48,7 @@ abstract class PayPalApiStruct implements \JsonSerializable
                 /** @var class-string<PayPalApiStruct> $className */
                 $className = $namespace . $camelCaseKey;
                 if (!\class_exists($className)) {
-                    continue;
+                    throw new \RuntimeException($className . ' does not exists in');
                 }
 
                 $instance = $this->createNewAssociation($className, $value);
@@ -65,7 +67,7 @@ abstract class PayPalApiStruct implements \JsonSerializable
             /** @var class-string<PayPalApiStruct> $className */
             $className = $namespace . $this->getClassNameOfOneToManyAssociation($camelCaseKey);
             if (!\class_exists($className)) {
-                continue;
+                throw new \RuntimeException($className . ' does not exists in');
             }
 
             $arrayWithToManyAssociations = [];

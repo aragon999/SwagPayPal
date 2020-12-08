@@ -5,10 +5,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Swag\PayPal\RestApi\V2\Api\Order\PurchaseUnit\Payments\Refund\SellerPayableBreakdown;
+namespace Swag\PayPal\RestApi\V1\Api\Disputes\Item\DisputedTransaction;
 
-use Swag\PayPal\RestApi\V2\Api\Common\Money;
+use Swag\PayPal\RestApi\V1\Api\Common\Money;
 
-class PayPalFee extends Money
+class GrossAmount extends Money
 {
 }

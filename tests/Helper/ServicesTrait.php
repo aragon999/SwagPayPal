@@ -139,7 +139,7 @@ trait ServicesTrait
 
         /** @var Connection $connection */
         $connection = $this->getContainer()->get(Connection::class);
-        $systemConfigService = new SystemConfigServiceMock($connection, $systemConfigRepo, new ConfigReader());
+        $systemConfigService = new SystemConfigServiceMock();
         foreach ($settings as $key => $value) {
             $systemConfigService->set($key, $value);
         }
